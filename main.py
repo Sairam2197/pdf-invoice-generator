@@ -32,7 +32,7 @@ for files in filepath:
     pdf.cell(w=30, h=8, txt=column[3], border=1)
     pdf.cell(w=30, h=8, txt=column[4], border=1, ln=1)
 
-#added rows
+    #added rows
     for index,row in csv_data.iterrows():
         pdf.set_font(family="Times", style="B", size=14)
         pdf.set_text_color(80, 80, 80)
@@ -41,6 +41,23 @@ for files in filepath:
         pdf.cell(w=40, h=8, txt=str(row["amount_purchased"]), border=1)
         pdf.cell(w=30, h=8, txt=str(row["price_per_unit"]), border=1)
         pdf.cell(w=30, h=8, txt=str(row["total_price"]), border=1,ln=1)
+    sum = csv_data["total_price"].sum()
+    pdf.cell(w=30, h=8, txt=" ", border=1)
+    pdf.cell(w=60, h=8, txt=" ", border=1)
+    pdf.cell(w=40, h=8, txt=" ", border=1)
+    pdf.cell(w=30, h=8, txt=" ", border=1)
+    pdf.cell(w=30, h=8, txt=str(sum), border=1, ln=1)
+
+    #add total sum
+    pdf.set_font(family="Times", style="B", size=14)
+    pdf.cell(w=30, h=8, txt=f"Total Price is {sum}", ln=1)
+
+    #add company logo
+    pdf.set_font(family="Times", style="B", size=14)
+    pdf.cell(w=39, h=8, txt=f"MSTR industries")
+
+    pdf.image("pythonhow.png", w=10)
+
 
     pdf.output(f"PDFs/{filename}.pdf")
 
